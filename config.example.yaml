@@ -1,0 +1,83 @@
+_config_version: 33
+
+model:
+  provider: deepseek
+  default: deepseek-v4-pro
+
+fallback_providers: []
+toolsets: []
+max_concurrent_sessions: 4
+max_live_sessions: 4
+group_sessions_per_user: true
+
+agent:
+  max_turns: 100
+  gateway_timeout: 300
+  gateway_timeout_warning: 240
+  reasoning_effort: medium
+  tool_use_enforcement: true
+  environment_probe: false
+  verify_on_stop: false
+  disabled_toolsets:
+    - terminal
+    - file
+    - web
+    - browser
+    - docker
+    - discord_admin
+
+platform_toolsets:
+  discord:
+    - memory
+    - clarify
+    - hermes_codex_bridge
+    - no_mcp
+
+plugins:
+  enabled:
+    - hermes-codex-bridge
+  disabled: []
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  write_approval: true
+  provider: deepseek
+
+approvals:
+  mode: manual
+  timeout: 300
+  cron_mode: deny
+  deny:
+    - "*"
+  destructive_slash_confirm: true
+
+display:
+  show_reasoning: false
+  streaming: true
+  memory_notifications: minimal
+
+timezone: Asia/Seoul
+
+discord:
+  require_mention: false
+  free_response_channels: "<MASTER_CHANNEL_ID>"
+  allowed_channels: "<MASTER_CHANNEL_ID>"
+  ignored_channels: "<WORK_CHANNEL_ID>"
+  auto_thread: false
+  thread_require_mention: true
+  history_backfill: false
+  reactions: false
+  unauthorized_dm_behavior: ignore
+  gateway_restart_notification: false
+  channel_prompts:
+    "<MASTER_CHANNEL_ID>": |
+      Answer normal questions directly. Use the Codex proposal bridge only
+      when the authorized owner explicitly requests a project change.
+
+platforms:
+  discord:
+    enabled: true
+    extra:
+      slash_commands: false
+      group_sessions_per_user: true

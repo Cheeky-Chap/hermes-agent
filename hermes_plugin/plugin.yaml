@@ -1,0 +1,9 @@
+name: hermes-codex-bridge
+version: "1.1.0"
+description: "Replay-safe, human-approved bridge from the answer-only Hermes Discord assistant to an isolated host Codex broker."
+author: local
+provides_tools:
+  - codex_propose
+hooks:
+  - pre_tool_call
+  - pre_gateway_dispatch

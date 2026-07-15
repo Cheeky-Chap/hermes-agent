@@ -1,0 +1,3 @@
+# Host runtime uses the Python standard library.
+# PyYAML is used by the full configuration regression test.
+PyYAML>=6.0,<7.0
