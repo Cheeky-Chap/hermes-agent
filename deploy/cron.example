@@ -1,0 +1,3 @@
+# Replace the path if the repository is installed elsewhere.
+# This only supervises the host broker; it does not start or restart Docker.
+* * * * * /path/to/hermes-agent/ensure-running.sh

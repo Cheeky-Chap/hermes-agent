@@ -5,6 +5,8 @@
 *.sqlite
 *.sqlite3
 *.log
+*.pid
+*.token
 **pycache**/
 __pycache__/
 *.pyc
@@ -16,11 +18,16 @@ state/
 logs/
 secrets/
 credentials/
+sessions/
+cache/
+tmp/
 backup/
 backups/
 *.tar
 *.tar.gz
 *.zip
+models/
+datasets/
 
 # Additional local/runtime material
 auth.json
@@ -29,7 +36,6 @@ auth.json
 *.p12
 *.pfx
 *.lock
-*.pid
 .codex/
 .hermes/
 .pytest_cache/
