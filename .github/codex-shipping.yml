@@ -1,0 +1,92 @@
+schema_version: 1
+enabled: true
+default_branch: main
+
+merge:
+  enabled: false
+  method: squash
+  admin_bypass: false
+
+policies:
+  hermes-agent-docs:
+    allowed_paths:
+      - README.md
+      - AGENTS.md
+      - docs/**
+      - agents/**/*.md
+
+    forbidden_paths:
+      - .env
+      - .env.*
+      - "**/*token*"
+      - "**/*secret*"
+      - "**/*credential*"
+      - "**/state/**"
+      - "**/logs/**"
+      - "**/backup/**"
+
+    commands:
+      - [git, diff, --check]
+
+  hermes-agent-code:
+    allowed_paths:
+      - hermes_plugin/**
+      - workers/**
+      - broker.py
+      - codex_runner.py
+      - launch_container.py
+      - discord_audit_check.py
+      - tests/**
+      - requirements.txt
+      - README.md
+      - docs/**
+      - AGENTS.md
+      - agents/**
+
+    forbidden_paths:
+      - .env
+      - .env.*
+      - config.yaml
+      - deploy/**
+      - "**/*token*"
+      - "**/*secret*"
+      - "**/*credential*"
+      - "**/state/**"
+      - "**/logs/**"
+      - "**/backup/**"
+      - "**/*.db"
+      - "**/*.sqlite"
+      - "**/*.sqlite3"
+
+    commands:
+      - [python3, -m, compileall, -q, hermes_plugin, workers, tests, broker.py, codex_runner.py, launch_container.py, discord_audit_check.py]
+      - [python3, -m, unittest, discover, -s, tests, -v]
+      - [git, diff, --check]
+
+  hermes-agent-ops-templates:
+    allowed_paths:
+      - deploy/**
+      - start.sh
+      - run-background.sh
+      - ensure-running.sh
+      - status.sh
+      - stop.sh
+      - config.example.yaml
+      - .env.example
+      - tests/**
+      - README.md
+      - docs/**
+
+    forbidden_paths:
+      - .env
+      - config.yaml
+      - "**/*token*"
+      - "**/*secret*"
+      - "**/*credential*"
+      - "**/state/**"
+      - "**/logs/**"
+      - "**/backup/**"
+
+    commands:
+      - [python3, -m, unittest, discover, -s, tests, -v]
+      - [git, diff, --check]
