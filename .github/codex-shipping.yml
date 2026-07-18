@@ -3,7 +3,7 @@ enabled: true
 default_branch: main
 
 merge:
-  enabled: false
+  enabled: true
   method: squash
   admin_bypass: false
 
